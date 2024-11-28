@@ -1,0 +1,71 @@
+﻿using Recipe.Data.Context;
+using Recipe.Data.Models.Domains;
+using Recipe.Data.Repository.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Recipe.Data.Repository.Implementation
+{
+    public class UserRepository(ApplicationDbContext _context) : IRepository<User>
+    {
+        public async Task<bool> AddAsync(User entity)
+        {
+            try
+            {
+                await _context.People.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(User entity)
+        {
+            try
+            {
+                _context.People.Update(entity);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _context.People.Where(x => x.Status == "Active").ToListAsync();
+        }
+
+        public async Task<User> GetByIdAsync(Guid id)
+        {
+            return await _context.People.FindAsync(id);
+        }
+
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            return _context.People.Where(x => x.Username == $"%{username}%").ToListAsync();
+        }
+
+        public async Task<bool> UpdateAsync(User entity)
+        {
+            try
+            {
+                _context.People.Update(entity);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
+}
