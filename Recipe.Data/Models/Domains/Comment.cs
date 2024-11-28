@@ -22,6 +22,6 @@ namespace Recipe.Data.Models.Domains
         public string Status { get; set; }
         //Navigation Properties
         public User User { get; set; }
-        public Recipe Recipe { get; set; }
+        public RecipeModel Recipe { get; set; }
     }
 }

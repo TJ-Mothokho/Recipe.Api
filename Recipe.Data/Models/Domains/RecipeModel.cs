@@ -21,6 +21,7 @@ namespace Recipe.Data.Models.Domains
         public Guid UserID { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Status { get; set; }
+        public bool IsEdited { get; set; }
 
         //Navigation Properties
         public Category Category { get; set; }

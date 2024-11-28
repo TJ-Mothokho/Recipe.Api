@@ -14,6 +14,6 @@ namespace Recipe.Data.Models.Domains
         public string Name { get; set; }
 
         //Navigation Properties
-        public ICollection<Recipe> Recipes { get; set; }
+        public ICollection<RecipeModel> Recipes { get; set; }
     }
 }

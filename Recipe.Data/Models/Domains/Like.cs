@@ -16,9 +16,10 @@ namespace Recipe.Data.Models.Domains
         public Guid UserID { get; set; }
         [ForeignKey("Recipe")]
         public Guid RecipeID { get; set; }
+        public bool IsLiked { get; set; }
 
         //Navigation Properties
         public User User { get; set; }
-        public Recipe Recipe { get; set; }
+        public RecipeModel Recipe { get; set; }
     }
 }
