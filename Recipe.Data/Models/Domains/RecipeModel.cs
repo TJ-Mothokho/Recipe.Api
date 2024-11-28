@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Recipe.Data.Models.Domains
 {
-    public class Recipe
+    public class RecipeModel
     {
         [Key]
         public Guid Id { get; set; }
