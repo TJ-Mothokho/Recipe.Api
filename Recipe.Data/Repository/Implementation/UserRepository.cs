@@ -1,4 +1,5 @@
-﻿using Recipe.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Recipe.Data.Context;
 using Recipe.Data.Models.Domains;
 using Recipe.Data.Repository.Interface;
 using System;
@@ -49,9 +50,9 @@ namespace Recipe.Data.Repository.Implementation
             return await _context.People.FindAsync(id);
         }
 
-        public async Task<User> GetByUsernameAsync(string username)
+        public async Task<IEnumerable<User>> GetByUsernameAsync(string username)
         {
-            return _context.People.Where(x => x.Username == $"%{username}%").ToListAsync();
+            return await _context.People.Where(x => x.Username == $"%{username}%").ToListAsync();
         }
 
         public async Task<bool> UpdateAsync(User entity)

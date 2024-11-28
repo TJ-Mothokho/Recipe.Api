@@ -1,4 +1,5 @@
-﻿using Recipe.Data.Models.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using Recipe.Data.Models.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
