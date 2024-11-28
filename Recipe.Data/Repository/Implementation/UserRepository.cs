@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Recipe.Data.Repository.Implementation
 {
-    public class UserRepository(ApplicationDbContext _context) : IRepository<User>
+    public class UserRepository(ApplicationDbContext _context) : IUserRepository
     {
         public async Task<bool> AddAsync(User entity)
         {
@@ -50,9 +50,15 @@ namespace Recipe.Data.Repository.Implementation
             return await _context.People.FindAsync(id);
         }
 
-        public async Task<IEnumerable<User>> GetByUsernameAsync(string username)
+        public async Task<IEnumerable<User>> searchUsername(string username)
         {
             return await _context.People.Where(x => x.Username == $"%{username}%").ToListAsync();
+        }
+
+        public async Task<bool> GetByUsernameAsync(string username)
+        {
+            var result = await _context.People.AnyAsync(x => x.Username == username);
+            return result;
         }
 
         public async Task<bool> UpdateAsync(User entity)

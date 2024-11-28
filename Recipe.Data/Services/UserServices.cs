@@ -11,12 +11,33 @@ using System.Threading.Tasks;
 
 namespace Recipe.Data.Services
 {
-    public class UserServices(IRepository<User> _userRepository, IMapper _mapper)
+    public class UserServices(IUserRepository _userRepository, IMapper _mapper)
     {
-        public async Task AddUserAsync(RegisterUserDTO request)
+        public async Task<bool> AddUserAsync(RegisterUserDTO request)
         {
-            var user = _mapper.Map<User>(request);
-            await _userRepository.AddAsync(user);
+            try
+            {
+                // Create an instance of the PasswordHasher class
+                PasswordHasher hasher = new PasswordHasher(request.Password);
+
+                // Hash the password
+                request.Password = hasher.GetPassword();
+                request.Username = request.Username.ToLower();
+
+                var user = _mapper.Map<User>(request);
+                await _userRepository.AddAsync(user);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UserExistsAsync(string username)
+        {
+            var doesExist = await _userRepository.GetByUsernameAsync(username);
+            return doesExist;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Recipe.Data.Models.Domains
     public class Category
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid CategoryID { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
 

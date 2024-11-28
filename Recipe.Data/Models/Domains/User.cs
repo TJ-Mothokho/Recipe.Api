@@ -10,11 +10,11 @@ namespace Recipe.Data.Models.Domains
     public class User
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
         public string Website { get; set; }
         public string Bio { get; set; }
         public string ProfilePicture { get; set; }

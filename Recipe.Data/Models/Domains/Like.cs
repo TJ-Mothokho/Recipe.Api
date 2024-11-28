@@ -10,8 +10,6 @@ namespace Recipe.Data.Models.Domains
 {
     public class Like
     {
-        [Key]
-        public Guid Id { get; set; }
         [ForeignKey("User")]
         public Guid UserID { get; set; }
         [ForeignKey("Recipe")]

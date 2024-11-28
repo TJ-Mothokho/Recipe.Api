@@ -11,7 +11,7 @@ namespace Recipe.Data.Models.Domains
     public class Comment
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid CommentID { get; set; }
 
         [ForeignKey("User")]
         public Guid UserID { get; set; }

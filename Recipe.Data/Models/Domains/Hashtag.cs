@@ -10,7 +10,7 @@ namespace Recipe.Data.Models.Domains
     public class Hashtag
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid HashtagID { get; set; }
         public string Name { get; set; }
 
         //Navigation Properties
