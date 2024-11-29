@@ -19,12 +19,23 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 //Services
 builder.Services.AddScoped<UserServices>();
+builder.Services.AddScoped<PasswordHasher>();
 
 //Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ILikeRepository, LikeRepository>();
+builder.Services.AddScoped<IHashtagRepository, HashtagRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 //Automapper
 builder.Services.AddAutoMapper(typeof(UserProfile));
+builder.Services.AddAutoMapper(typeof(RecipeProfile));
+builder.Services.AddAutoMapper(typeof(CommentProfile));
+builder.Services.AddAutoMapper(typeof(LikeProfile));
+builder.Services.AddAutoMapper(typeof(HashtagProfile));
+builder.Services.AddAutoMapper(typeof(CategoryProfile));
 
 var app = builder.Build();
 
