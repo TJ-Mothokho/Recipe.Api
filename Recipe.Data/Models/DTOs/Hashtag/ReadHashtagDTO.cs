@@ -8,7 +8,7 @@ namespace Recipe.Data.Models.DTOs.Hashtag
 {
     public class ReadHashtagDTO
     {
-        public Guid Id { get; set; }
+        public Guid HashtagID { get; set; }
         public string Name { get; set; }
     }
 }

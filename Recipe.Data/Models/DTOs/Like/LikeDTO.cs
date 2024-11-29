@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Recipe.Data.Models.DTOs.Like
 {
-    public class AddLikeDTO
+    public class LikeDTO
     {
         public Guid UserID { get; set; }
         public Guid RecipeID { get; set; }
