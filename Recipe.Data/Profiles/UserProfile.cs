@@ -18,6 +18,9 @@ namespace Recipe.Data.Profiles
                 .ForMember(user => user.Status, map => map.MapFrom(_ => "Active"))
                 .ForMember(user => user.Role, map => map.MapFrom(_ => "User"));
 
+            CreateMap<UpdateUserDTO, User>();
+
+            CreateMap<User, UserDetailsDTO>();
         }
     }
 }

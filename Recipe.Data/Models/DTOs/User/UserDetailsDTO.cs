@@ -8,7 +8,7 @@ namespace Recipe.Data.Models.DTOs.User
 {
     public class UserDetailsDTO
     {
-        public Guid Id { get; set; }
+        public Guid UserID { get; set; }
         public string Username { get; set; }
         public string Website { get; set; }
         public string Bio { get; set; }

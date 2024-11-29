@@ -9,7 +9,10 @@ namespace Recipe.Data.Models.DTOs.Comment
 {
     public class ReadCommentDTO
     {
+        public Guid CommentID { get; set; }
         public string UserName { get; set; }
+        public Guid UserID { get; set; }
+        public Guid RecipeID { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
     }

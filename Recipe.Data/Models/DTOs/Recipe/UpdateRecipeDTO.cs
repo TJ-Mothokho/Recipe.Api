@@ -9,7 +9,7 @@ namespace Recipe.Data.Models.DTOs.Recipe
 {
     public class UpdateRecipeDTO
     {
-        public Guid Id { get; set; }
+        public Guid RecipeID { get; set; }
         public string Title { get; set; }
         public string Instructions { get; set; }
         public string ImageUrl { get; set; }

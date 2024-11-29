@@ -8,7 +8,7 @@ namespace Recipe.Data.Models.DTOs.Category
 {
     public class UpdateCategoryDTO
     {
-        public Guid Id { get; set; }
+        public Guid CategoryID { get; set; }
         public string Name { get; set; }
     }
 }

@@ -11,7 +11,5 @@ namespace Recipe.Data.Models.DTOs.Like
     {
         public Guid UserID { get; set; }
         public Guid RecipeID { get; set; }
-
-        //Check Composite keys in EF
     }
 }
