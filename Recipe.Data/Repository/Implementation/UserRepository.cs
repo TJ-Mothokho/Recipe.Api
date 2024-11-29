@@ -36,9 +36,10 @@ namespace Recipe.Data.Repository.Implementation
             return await _context.People.FindAsync(id);
         }
 
-        public async Task<IEnumerable<User>> searchUsername(string username)
+        public async Task<IEnumerable<User>> SearchUsername(string username)
         {
-            return await _context.People.Where(x => x.Username == $"%{username}%").ToListAsync();
+            //get all users whose username contains the search term
+            return await _context.People.Where(x => x.Username.Contains(username)).ToListAsync();
         }
 
         public async Task<bool> GetByUsernameAsync(string username)

@@ -17,7 +17,7 @@ namespace Recipe.Data.Repository.Interface
 
         Task<User> GetByIdAsync(Guid id);
 
-        Task<IEnumerable<User>> searchUsername(string username);
+        Task<IEnumerable<User>> SearchUsername(string username);
 
         Task<bool> GetByUsernameAsync(string username);
 

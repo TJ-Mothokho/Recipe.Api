@@ -19,7 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 //Services
 builder.Services.AddScoped<UserServices>();
-builder.Services.AddScoped<PasswordHasher>();
+//builder.Services.AddScoped<PasswordHasher>();
 
 //Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();

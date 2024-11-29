@@ -10,7 +10,7 @@ namespace Recipe.Api.Controllers
     [ApiController]
     public class UsersController(UserServices _userServices) : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> RegisterUserAsync(RegisterUserDTO request)
         {
             //check if username exists
@@ -20,6 +20,41 @@ namespace Recipe.Api.Controllers
             }
 
             bool response = await _userServices.AddUserAsync(request);
+            return Ok();
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllUsersAsync()
+        {
+            var response = await _userServices.GetAllUsersAsync();
+            return Ok(response);
+        }
+
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetUserByIdAsync(Guid id)
+        {
+            var response = await _userServices.GetUserByIdAsync(id);
+            return Ok(response);
+        }
+
+        [HttpGet("Search")]
+        public async Task<IActionResult> SearchUserAsync(string username)
+        {
+            var response = await _userServices.SearchUserAsync(username);
+            return Ok(response);
+        }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateUserAsync(UserDetailsDTO request)
+        {
+            bool response = await _userServices.UpdateUserAsync(request);
+            return Ok();
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeleteUserAsync(Guid id)
+        {
+            bool response = await _userServices.DeleteUserAsync(id);
             return Ok();
         }
     }
