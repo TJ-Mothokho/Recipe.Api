@@ -11,8 +11,6 @@ namespace Recipe.Data.Repository.Interface
     public interface IUserRepository
     {
         Task<bool> AddAsync(User entity);
-
-        Task<bool> DeleteAsync(User entity);
         
 
         Task<IEnumerable<User>> GetAllAsync();

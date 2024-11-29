@@ -26,20 +26,6 @@ namespace Recipe.Data.Repository.Implementation
             }
         }
 
-        public async Task<bool> DeleteAsync(User entity)
-        {
-            try
-            {
-                _context.People.Update(entity);
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.People.Where(x => x.Status == "Active").ToListAsync();
