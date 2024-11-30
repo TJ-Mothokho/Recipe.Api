@@ -16,7 +16,21 @@ namespace Recipe.Data.Services
         {
             try
             {
-                var recipe = _mapper.Map<RecipeModel>(request);
+                var recipe = new RecipeModel
+                {
+                    Title = request.Title,
+                    Instructions = request.Instructions,
+                    ImageUrl = request.ImageUrl,
+                    UserID = request.UserID,
+                    CategoryID = request.CategoryID,
+                    CreatedAt = DateTime.Now,
+                    Status = "Active",
+                    IsEdited = false
+
+                    //Hashtags = request.Hashtags.Select(x => new Hashtag { Name = x }).ToList()
+                };
+
+
                 await _recipeRepository.AddRecipe(recipe);
                 return true;
             }

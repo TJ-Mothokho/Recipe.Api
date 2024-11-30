@@ -13,6 +13,7 @@ namespace Recipe.Data.Models.DTOs.Recipe
         public string Title { get; set; }
         public string Instructions { get; set; }
         public string ImageUrl { get; set; }
+        public Guid UserID { get; set; }
         public Guid CategoryID { get; set; }
         public List<string> Hashtags { get; set; }
     }
