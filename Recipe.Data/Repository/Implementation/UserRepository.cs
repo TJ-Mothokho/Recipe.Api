@@ -61,5 +61,17 @@ namespace Recipe.Data.Repository.Implementation
                 return false;
             }
         }
+
+        public async Task<User> Login(string username, string password)
+        {
+            var user = await _context.People.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+
+            if (user == null)
+            {
+                 user = await _context.People.FirstOrDefaultAsync(u => u.Email == username && u.Password == password);
+            }
+
+            return user;
+        }
     }
 }

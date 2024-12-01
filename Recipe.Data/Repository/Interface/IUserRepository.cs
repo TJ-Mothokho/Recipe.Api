@@ -22,5 +22,7 @@ namespace Recipe.Data.Repository.Interface
         Task<bool> GetByUsernameAsync(string username);
 
         Task<bool> UpdateAsync(User entity);
+
+        Task<User> Login(string username, string password);
     }
 }

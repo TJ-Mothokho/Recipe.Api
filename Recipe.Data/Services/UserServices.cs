@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Recipe.Data.Models.Domains;
 using Recipe.Data.Models.DTOs.User;
 using Recipe.Data.Repository.Implementation;
@@ -87,6 +88,33 @@ namespace Recipe.Data.Services
             {
                 return false;
             }
+        }
+
+        public async Task<UserDetailsDTO> Login(string username, string password)
+        {
+            // Create an instance of the PasswordHasher class
+            PasswordHasher hasher = new PasswordHasher(password);
+
+            // Hash the password
+            password = hasher.GetPassword();
+            username = username.ToLower();
+
+            var user = await _userRepository.Login(username, password);
+
+            var userDetails = new UserDetailsDTO()
+            {
+                UserID = user.UserID,
+                Username = user.Username,
+                Email = user.Email,
+                Website = user.Website,
+                Bio = user.Bio,
+                Role = user.Role,
+                CreatedAt = user.CreatedAt,
+                ProfilePicture = user.ProfilePicture,
+                IsVerified = user.IsVerified,
+            };
+
+            return userDetails;
         }
 
 
