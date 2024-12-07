@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Recipe.Data.Services
 {
-    public class RecipeService(IRecipeRepository _recipeRepository, IMapper _mapper)
+    public class RecipeService(IRecipeRepository _recipeRepository, CategoryService _category, UserServices _user, IMapper _mapper)
     {
         public async Task<bool> AddRecipeAsync(CreateRecipeDTO request)
         {

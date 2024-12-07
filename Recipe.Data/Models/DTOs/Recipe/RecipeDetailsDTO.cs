@@ -14,6 +14,7 @@ namespace Recipe.Data.Models.DTOs.Recipe
         public string Instructions { get; set; }
         public string ImageUrl { get; set; }
         public Guid CategoryID { get; set; }
+        public string Category { get; set; }
         public Guid UserID { get; set; }
         public string UserName { get; set; }
         public string ProfilePicture { get; set; }

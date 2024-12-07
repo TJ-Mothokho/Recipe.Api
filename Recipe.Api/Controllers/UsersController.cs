@@ -16,9 +16,8 @@ namespace Recipe.Api.Controllers
             //check if username exists
             if (await _userServices.UserExistsAsync(request.Username))
             {
-                return BadRequest("Username already exists");
+                return Ok("Username already exists");
             }
-
             bool response = await _userServices.AddUserAsync(request);
             return Ok();
         }

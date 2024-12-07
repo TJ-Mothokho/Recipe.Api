@@ -11,7 +11,7 @@ namespace Recipe.Data.Models.DTOs.User
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public DateOnly DateOfBirth { get; set; }
+        public int DateOfBirth { get; set; }
         public string Website { get; set; }
         public string Bio { get; set; }
         public string ProfilePicture { get; set; }

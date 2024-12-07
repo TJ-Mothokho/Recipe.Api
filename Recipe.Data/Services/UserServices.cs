@@ -24,8 +24,10 @@ namespace Recipe.Data.Services
                 // Hash the password
                 request.Password = hasher.GetPassword();
                 request.Username = request.Username.ToLower();
+                
 
                 var user = _mapper.Map<User>(request);
+                //user.DateOfBirth = DateOnly.FromDayNumber(request.DateOfBirth);
                 await _userRepository.AddAsync(user);
                 return true;
             }
