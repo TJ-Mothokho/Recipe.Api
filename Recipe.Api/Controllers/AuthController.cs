@@ -9,6 +9,7 @@ using Recipe.Data.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 namespace Recipe.Api.Controllers
 {
@@ -29,13 +30,15 @@ namespace Recipe.Api.Controllers
                 }
 
                 var token = IssueToken(user);
-                return Ok(token);
+                user.token = token;
+
+                return Ok(user);
             }
             return BadRequest("Invalid request body.");
 
         }
 
-        private string IssueToken(UserDetailsDTO user)
+        private string IssueToken(ReadLoggedInDetailsDTO user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

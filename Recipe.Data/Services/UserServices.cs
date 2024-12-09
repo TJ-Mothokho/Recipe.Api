@@ -92,7 +92,7 @@ namespace Recipe.Data.Services
             }
         }
 
-        public async Task<UserDetailsDTO> Login(string username, string password)
+        public async Task<ReadLoggedInDetailsDTO> Login(string username, string password)
         {
             // Create an instance of the PasswordHasher class
             PasswordHasher hasher = new PasswordHasher(password);
@@ -103,18 +103,20 @@ namespace Recipe.Data.Services
 
             var user = await _userRepository.Login(username, password);
 
-            var userDetails = new UserDetailsDTO()
+            var userDetails = new ReadLoggedInDetailsDTO();
+
+            if (user != null)
             {
-                UserID = user.UserID,
-                Username = user.Username,
-                Email = user.Email,
-                Website = user.Website,
-                Bio = user.Bio,
-                Role = user.Role,
-                CreatedAt = user.CreatedAt,
-                ProfilePicture = user.ProfilePicture,
-                IsVerified = user.IsVerified,
-            };
+                userDetails.UserID = user.UserID;
+                userDetails.Username = user.Username;
+                userDetails.Email = user.Email;
+                userDetails.Website = user.Website;
+                userDetails.Bio = user.Bio;
+                userDetails.Role = user.Role;
+                userDetails.CreatedAt = user.CreatedAt;
+                userDetails.ProfilePicture = user.ProfilePicture;
+                userDetails.IsVerified = user.IsVerified;
+            }
 
             return userDetails;
         }
