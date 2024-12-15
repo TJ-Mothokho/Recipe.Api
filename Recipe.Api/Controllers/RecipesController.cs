@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Recipe.Data.Models.DTOs.Like;
 using Recipe.Data.Models.DTOs.Recipe;
 using Recipe.Data.Services;
+using System.Linq.Expressions;
 
 namespace Recipe.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecipesController(RecipeService _recipeService) : ControllerBase
+    public class RecipesController(RecipeService _recipeService, LikeService _likeService) : ControllerBase
     {
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllRecipes()
@@ -41,6 +43,7 @@ namespace Recipe.Api.Controllers
             return Ok(recipes);
         }
         [HttpPost("Add")]
+        [Authorize]
         public async Task<IActionResult> AddRecipeAsync(CreateRecipeDTO request)
         {
             var result = await _recipeService.AddRecipeAsync(request);
@@ -60,6 +63,37 @@ namespace Recipe.Api.Controllers
             var result = await _recipeService.DeleteRecipeAsync(id);
             return Ok(result);
         }
+
+        [HttpPost("/api/Like")]
+        public async Task<IActionResult> AddLike(Guid userID, Guid recipeID)
+        {
+            var like = new LikeDTO()
+            {
+                UserID = userID,
+                RecipeID = recipeID,
+                IsLiked = true
+            };
+
+            var result = await _likeService.AddLike(like);
+
+            return Ok(result);
+        }
+
+        [HttpPost("/api/RemoveLike")]
+        public async Task<IActionResult> RemoveLike(Guid userID, Guid recipeID)
+        {
+            var like = new LikeDTO()
+            {
+                UserID = userID,
+                RecipeID = recipeID,
+                IsLiked = false
+            };
+
+            var result = await _likeService.RemoveLike(like);
+
+            return Ok(result);
+        }
+
 
     }
 }

@@ -24,6 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<LikeService>();
 
 //Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();

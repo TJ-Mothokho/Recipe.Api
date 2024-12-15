@@ -11,5 +11,6 @@ namespace Recipe.Data.Models.DTOs.Like
     {
         public Guid UserID { get; set; }
         public Guid RecipeID { get; set; }
+        public bool IsLiked { get; set; }
     }
 }
