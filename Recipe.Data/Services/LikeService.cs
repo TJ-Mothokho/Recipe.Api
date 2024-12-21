@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Recipe.Data.Services
@@ -56,10 +57,42 @@ namespace Recipe.Data.Services
             return response;
         }
 
-        public async Task<int> GetLikes(Guid recipeID)
+        public async Task<IEnumerable<object>> GetLikes()
         {
-            return await _like.GetLikeCount(recipeID);
+            var likes = await _like.GetAllLikes(); // Retrieve all likes
+            var listOfLikes = new List<LikeDTO>();
+
+            // Map retrieved likes to LikeDTO
+            if (likes != null)
+            {
+                foreach (var like in likes)
+                {
+                    var item = new LikeDTO()
+                    {
+                        UserID = like.UserID,
+                        RecipeID = like.RecipeID,
+                        IsLiked = like.IsLiked
+                    };
+
+                    listOfLikes.Add(item);
+                }
+
+                // Group by RecipeID and calculate counts
+                var response = listOfLikes
+                    .GroupBy(like => like.RecipeID) // Group by RecipeID
+                    .Select(group => new
+                    {
+                        RecipeID = group.Key,        // Group key (RecipeID)
+                        LikeCount = group.Count()    // Count of likes
+                    });
+
+                return response; // Return grouped result
+            }
+
+            // If no likes exist, return an empty result
+            return Enumerable.Empty<object>();
         }
+
 
         public async Task<IEnumerable<LikeDTO>> GetAllLikes(Guid id)
         {

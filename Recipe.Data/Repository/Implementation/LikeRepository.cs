@@ -40,11 +40,6 @@ namespace Recipe.Data.Repository.Implementation
             }
         }
 
-        public async Task<int> GetLikeCount(Guid recipeID)
-        {
-            return await _context.Likes.Where(x => x.RecipeID == recipeID).CountAsync();
-        }
-
         public async Task<Like> GetLike(Guid userID, Guid recipeID)
         {
             return await _context.Likes.FirstOrDefaultAsync(x => x.UserID == userID && x.RecipeID == recipeID);
@@ -53,6 +48,11 @@ namespace Recipe.Data.Repository.Implementation
         public async Task<IEnumerable<Like>> GetAllLikes(Guid userID)
         {
             return await _context.Likes.Where(x => x.UserID == userID).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Like>> GetAllLikes()
+        {
+            return await _context.Likes.ToListAsync();
         }
 
 

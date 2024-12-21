@@ -11,8 +11,8 @@ namespace Recipe.Data.Repository.Interface
     {
         Task<bool> AddLike(Like like);
         Task<bool> RemoveLike(Like like);
-        Task<int> GetLikeCount(Guid recipeID);
         Task<Like> GetLike(Guid userID, Guid recipeID);
         Task<IEnumerable<Like>> GetAllLikes(Guid userID);
+        Task<IEnumerable<Like>> GetAllLikes();
     }
 }

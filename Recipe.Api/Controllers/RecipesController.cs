@@ -64,35 +64,7 @@ namespace Recipe.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("/api/Like")]
-        public async Task<IActionResult> AddLike(Guid userID, Guid recipeID)
-        {
-            var like = new LikeDTO()
-            {
-                UserID = userID,
-                RecipeID = recipeID,
-                IsLiked = true
-            };
-
-            var result = await _likeService.AddLike(like);
-
-            return Ok(result);
-        }
-
-        [HttpPost("/api/RemoveLike")]
-        public async Task<IActionResult> RemoveLike(Guid userID, Guid recipeID)
-        {
-            var like = new LikeDTO()
-            {
-                UserID = userID,
-                RecipeID = recipeID,
-                IsLiked = false
-            };
-
-            var result = await _likeService.RemoveLike(like);
-
-            return Ok(result);
-        }
+      
 
 
     }
