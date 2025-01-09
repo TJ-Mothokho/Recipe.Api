@@ -45,7 +45,7 @@ namespace Recipe.Api.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateUserAsync(UserDetailsDTO request)
+        public async Task<IActionResult> UpdateUserAsync(UpdateUserDTO request)
         {
             bool response = await _userServices.UpdateUserAsync(request);
             return Ok();

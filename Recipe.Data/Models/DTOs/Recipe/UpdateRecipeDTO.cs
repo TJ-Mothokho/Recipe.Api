@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Recipe.Data.Models.DTOs.Recipe
         public Guid RecipeID { get; set; }
         public string Title { get; set; }
         public string Instructions { get; set; }
-        public string ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
         public Guid CategoryID { get; set; }
         public List<string> Hashtags { get; set; }
     }

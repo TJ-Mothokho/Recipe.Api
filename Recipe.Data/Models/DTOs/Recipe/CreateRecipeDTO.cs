@@ -1,4 +1,5 @@
-﻿using Recipe.Data.Models.Domains;
+﻿using Microsoft.AspNetCore.Http;
+using Recipe.Data.Models.Domains;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,9 +13,9 @@ namespace Recipe.Data.Models.DTOs.Recipe
     {
         public string Title { get; set; }
         public string Instructions { get; set; }
-        public string ImageUrl { get; set; }
+        public IFormFile Image { get; set; }
         public Guid UserID { get; set; }
         public Guid CategoryID { get; set; }
-        public List<string> Hashtags { get; set; }
+        //public List<string> Hashtags { get; set; }
     }
 }

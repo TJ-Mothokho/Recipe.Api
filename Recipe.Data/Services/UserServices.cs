@@ -24,9 +24,29 @@ namespace Recipe.Data.Services
                 // Hash the password
                 request.Password = hasher.GetPassword();
                 request.Username = request.Username.ToLower();
-                
 
-                var user = _mapper.Map<User>(request);
+                var user = new User
+                {
+                    Username = request.Username,
+                    Email = request.Email,
+                    Password = request.Password,
+                    DateOfBirth = request.DateOfBirth,
+                    Website = request.Website,
+                    Bio = request.Bio,
+                    ProfilePicture = new byte[request.ProfilePicture.Length],
+                    IsVerified = false,
+                    Role = "User",
+                    CreatedAt = DateTime.Now,
+                    Status = "Active"
+                };
+
+                using (var stream = new MemoryStream())
+                {
+                    request.ProfilePicture.CopyTo(stream);
+                    user.ProfilePicture = stream.ToArray();
+                }
+
+                //var user = _mapper.Map<User>(request);
                 //user.DateOfBirth = DateOnly.FromDayNumber(request.DateOfBirth);
                 await _userRepository.AddAsync(user);
                 return true;
@@ -45,7 +65,26 @@ namespace Recipe.Data.Services
         public async Task<IEnumerable<UserDetailsDTO>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetAllAsync();
-            var response = _mapper.Map<IEnumerable<UserDetailsDTO>>(users);
+
+            var response = new List<UserDetailsDTO>();
+
+            foreach (var user in users)
+            {
+                var detail = new UserDetailsDTO
+                {
+                    UserID = user.UserID,
+                    Username = user.Username,
+                    Bio = user.Bio,
+                    Website = user.Website,
+                    Email = user.Email,
+                    ProfilePicture = user.ProfilePicture,
+                    IsVerified = user.IsVerified,
+                    CreatedAt = user.CreatedAt
+                };
+
+                response.Add(detail);
+            }
+
             return response;
         }
 
@@ -63,11 +102,34 @@ namespace Recipe.Data.Services
             return response;
         }
 
-        public async Task<bool> UpdateUserAsync(UserDetailsDTO request)
+        public async Task<bool> UpdateUserAsync(UpdateUserDTO request)
         {
             try
             {
-                var user = _mapper.Map<User>(request);
+                // Create an instance of the PasswordHasher class
+                PasswordHasher hasher = new PasswordHasher(request.Password);
+
+                // Hash the password
+                request.Password = hasher.GetPassword();
+                request.Username = request.Username.ToLower();
+
+                var user = new User
+                {
+                    UserID = request.UserID,
+                    Username = request.Username,
+                    Email = request.Email,
+                    Password = request.Password,
+                    Website = request.Website,
+                    Bio = request.Bio,
+                    ProfilePicture = new byte[request.ProfilePicture.Length]
+                };
+
+                using (var stream = new MemoryStream())
+                {
+                    request.ProfilePicture.CopyTo(stream);
+                    user.ProfilePicture = stream.ToArray();
+                }
+
                 var response = await _userRepository.UpdateAsync(user);
                 return response;
             }

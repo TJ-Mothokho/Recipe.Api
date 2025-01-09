@@ -16,8 +16,6 @@ namespace Recipe.Data.Repository.Implementation
         {
             try
             {
-                
-                
                 await _context.Recipes.AddAsync(recipe);
                 await _context.SaveChangesAsync();
                 return true;
@@ -43,19 +41,19 @@ namespace Recipe.Data.Repository.Implementation
         }
         public async Task<IEnumerable<RecipeModel>> GetAllRecipes()
         {
-            return await _context.Recipes.ToListAsync();
+            return await _context.Recipes.Where(x=>x.Status=="Active").ToListAsync();
         }
         public async Task<IEnumerable<RecipeModel>> GetByCategory(Guid categoryID)
         {
-            return await _context.Recipes.Where(x => x.CategoryID == categoryID).ToListAsync();
+            return await _context.Recipes.Where(x => x.CategoryID == categoryID && x.Status=="Active").ToListAsync();
         }
         public async Task<IEnumerable<RecipeModel>> GetByHashtag(Guid hashtagID)
         {
-            return await _context.Recipes.Where(x => x.Hashtags.Any(y => y.HashtagID == hashtagID)).ToListAsync();
+            return await _context.Recipes.Where(x => x.Hashtags.Any(y => y.HashtagID == hashtagID) && x.Status == "Active").ToListAsync();
         }
         public async Task<IEnumerable<RecipeModel>> GetByUser(Guid userID)
         {
-            return await _context.Recipes.Where(x => x.UserID == userID).ToListAsync();
+            return await _context.Recipes.Where(x => x.UserID == userID && x.Status == "Active").ToListAsync();
         }
         public async Task<RecipeModel> GetRecipeById(Guid id)
         {

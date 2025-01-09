@@ -14,7 +14,7 @@ namespace Recipe.Data.Models.Domains
         public Guid RecipeID { get; set; }
         public string Title { get; set; }
         public string Instructions { get; set; }
-        public string ImageUrl { get; set; }
+        public byte[]? Image { get; set; }
         [ForeignKey("Category")]
         public Guid CategoryID { get; set; }
         [ForeignKey("User")]

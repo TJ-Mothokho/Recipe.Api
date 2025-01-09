@@ -43,7 +43,6 @@ namespace Recipe.Api.Controllers
             return Ok(recipes);
         }
         [HttpPost("Add")]
-        [Authorize]
         public async Task<IActionResult> AddRecipeAsync(CreateRecipeDTO request)
         {
             var result = await _recipeService.AddRecipeAsync(request);

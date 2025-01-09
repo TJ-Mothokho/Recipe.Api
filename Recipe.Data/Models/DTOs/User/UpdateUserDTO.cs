@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,6 @@ namespace Recipe.Data.Models.DTOs.User
         public string Email { get; set; }
         public string Website { get; set; }
         public string Bio { get; set; }
-        public string ProfilePicture { get; set; }
+        public IFormFile? ProfilePicture { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Recipe.Data.Models.Domains
         public DateOnly DateOfBirth { get; set; }
         public string Website { get; set; }
         public string Bio { get; set; }
-        public string ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; }
         public bool IsVerified { get; set; }
         public string Role { get; set; }
         public DateTime CreatedAt { get; set; }
