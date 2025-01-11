@@ -76,7 +76,7 @@ namespace Recipe.Data.Services
                     RecipeID = recipe.RecipeID,
                     Title = recipe.Title,
                     Instructions = recipe.Instructions,
-                    Image = recipe.Image,
+                    Image = $"data:image/jpg;base64, {Convert.ToBase64String(recipe.Image)}",
                     CategoryID= recipe.CategoryID,
                     UserID = recipe.UserID,
                     CreatedAt = recipe.CreatedAt,

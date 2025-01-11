@@ -77,7 +77,7 @@ namespace Recipe.Data.Services
                     Bio = user.Bio,
                     Website = user.Website,
                     Email = user.Email,
-                    ProfilePicture = user.ProfilePicture,
+                    ProfilePicture = $"data:image/jpg;base64, {Convert.ToBase64String(user.ProfilePicture)}",
                     IsVerified = user.IsVerified,
                     CreatedAt = user.CreatedAt
                 };
@@ -176,7 +176,7 @@ namespace Recipe.Data.Services
                 userDetails.Bio = user.Bio;
                 userDetails.Role = user.Role;
                 userDetails.CreatedAt = user.CreatedAt;
-                userDetails.ProfilePicture = user.ProfilePicture;
+                userDetails.ProfilePicture = $"data:image/jpeg;base64, {Convert.ToBase64String(user.ProfilePicture)}";
                 userDetails.IsVerified = user.IsVerified;
             }
 

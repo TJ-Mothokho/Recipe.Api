@@ -13,12 +13,12 @@ namespace Recipe.Data.Models.DTOs.Recipe
         public Guid RecipeID { get; set; }
         public string Title { get; set; }
         public string Instructions { get; set; }
-        public byte[]? Image { get; set; }
+        public string Image { get; set; }
         public Guid CategoryID { get; set; }
         public string Category { get; set; }
         public Guid UserID { get; set; }
         public string UserName { get; set; }
-        public byte[]? ProfilePicture { get; set; }
+        public string ProfilePicture { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsEdited { get; set; }
         public List<string>? Hashtags { get; set; }
