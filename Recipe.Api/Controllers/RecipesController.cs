@@ -18,7 +18,7 @@ namespace Recipe.Api.Controllers
             var recipes = await _recipeService.GetAllRecipesAsync();
             return Ok(recipes);
         }
-        [HttpGet("/Get/{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var recipe = await _recipeService.GetRecipeByIdAsync(id);
@@ -49,14 +49,14 @@ namespace Recipe.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("/Update/{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateRecipeAsync(UpdateRecipeDTO request)
         {
             var result = await _recipeService.UpdateRecipeAsync(request);
             return Ok(result);
         }
 
-        [HttpDelete("/Delete/{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteRecipeAsync(Guid id)
         {
             var result = await _recipeService.DeleteRecipeAsync(id);
