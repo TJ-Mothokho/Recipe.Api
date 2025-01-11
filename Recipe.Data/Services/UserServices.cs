@@ -45,9 +45,6 @@ namespace Recipe.Data.Services
                     request.ProfilePicture.CopyTo(stream);
                     user.ProfilePicture = stream.ToArray();
                 }
-
-                //var user = _mapper.Map<User>(request);
-                //user.DateOfBirth = DateOnly.FromDayNumber(request.DateOfBirth);
                 await _userRepository.AddAsync(user);
                 return true;
             }
@@ -91,14 +88,45 @@ namespace Recipe.Data.Services
         public async Task<UserDetailsDTO> GetUserByIdAsync(Guid id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            var response = _mapper.Map<UserDetailsDTO>(user);
+
+            var response = new UserDetailsDTO
+            {
+                UserID = user.UserID,
+                Username = user.Username,
+                Bio = user.Bio,
+                Website = user.Website,
+                Email = user.Email,
+                ProfilePicture = $"data:image/jpg;base64, {Convert.ToBase64String(user.ProfilePicture)}",
+                IsVerified = user.IsVerified,
+                CreatedAt = user.CreatedAt
+            };
+
             return response;
         }
 
         public async Task<IEnumerable<UserDetailsDTO>> SearchUserAsync(string username)
         {
             var users = await _userRepository.SearchUsername(username);
-            var response = _mapper.Map<IEnumerable<UserDetailsDTO>>(users);
+
+            var response = new List<UserDetailsDTO>();
+
+            foreach (var user in users)
+            {
+                var detail = new UserDetailsDTO
+                {
+                    UserID = user.UserID,
+                    Username = user.Username,
+                    Bio = user.Bio,
+                    Website = user.Website,
+                    Email = user.Email,
+                    ProfilePicture = $"data:image/jpg;base64, {Convert.ToBase64String(user.ProfilePicture)}",
+                    IsVerified = user.IsVerified,
+                    CreatedAt = user.CreatedAt
+                };
+
+                response.Add(detail);
+            }
+
             return response;
         }
 

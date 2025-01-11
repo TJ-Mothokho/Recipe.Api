@@ -49,7 +49,7 @@ namespace Recipe.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Update/{id}")]
+        [HttpPut("Update")]
         public async Task<IActionResult> UpdateRecipeAsync(UpdateRecipeDTO request)
         {
             var result = await _recipeService.UpdateRecipeAsync(request);
@@ -62,9 +62,5 @@ namespace Recipe.Api.Controllers
             var result = await _recipeService.DeleteRecipeAsync(id);
             return Ok(result);
         }
-
-      
-
-
     }
 }

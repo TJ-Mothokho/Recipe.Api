@@ -30,7 +30,7 @@ namespace Recipe.Api.Controllers
             return Ok(response);
         }
 
-        [HttpGet("GetById")]
+        [HttpGet("Get/{id}")]
         public async Task<IActionResult> GetUserByIdAsync(Guid id)
         {
             var response = await _userServices.GetUserByIdAsync(id);
@@ -51,7 +51,7 @@ namespace Recipe.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteUserAsync(Guid id)
         {
             bool response = await _userServices.DeleteUserAsync(id);
