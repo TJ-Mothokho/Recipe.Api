@@ -211,6 +211,26 @@ namespace Recipe.Data.Services
             return userDetails;
         }
 
+        public async Task<IEnumerable<UsernameDTO>> GetUsernames()
+        {
+            var users = await _userRepository.GetAllAsync();
+
+            var response = new List<UsernameDTO>();
+
+            foreach (var user in users)
+            {
+                var detail = new UsernameDTO
+                {
+                    UserID = user.UserID,
+                    Username = user.Username
+                };
+
+                response.Add(detail);
+            }
+
+            return response;
+        }
+
 
     }
 }
