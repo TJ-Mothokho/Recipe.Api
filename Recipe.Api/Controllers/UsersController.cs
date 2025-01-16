@@ -30,6 +30,13 @@ namespace Recipe.Api.Controllers
             return Ok(response);
         }
 
+        [HttpGet("GetUsernames")]
+        public async Task<IActionResult> GetAllUsernames()
+        {
+            var response = await _userServices.GetUsernames();
+            return Ok(response);
+        }
+
         [HttpGet("Get/{id}")]
         public async Task<IActionResult> GetUserByIdAsync(Guid id)
         {
