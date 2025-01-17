@@ -10,7 +10,6 @@ namespace Recipe.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class RecipesController(RecipeService _recipeService, LikeService _likeService) : ControllerBase
     {
         [HttpGet("GetAll")]
