@@ -27,5 +27,7 @@ namespace Recipe.Data.Models.Domains
         public ICollection<RecipeModel> Recipes { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Like> Likes { get; set; }
+        public ICollection<Follower> followers { get; set; }
+        public ICollection<Following> followings { get; set; }
     }
 }
