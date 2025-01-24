@@ -25,6 +25,8 @@ builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<LikeService>();
+builder.Services.AddScoped<FollowerServices>();
+builder.Services.AddScoped<FollowingServices>();
 
 //Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -33,6 +35,8 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 builder.Services.AddScoped<IHashtagRepository, HashtagRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IFollowingRepository, FollowingRepository>();
+builder.Services.AddScoped<IFollowerRepository, FollowerRepository>();
 
 //Automapper
 builder.Services.AddAutoMapper(typeof(UserProfile));
