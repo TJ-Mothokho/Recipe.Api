@@ -20,6 +20,12 @@ namespace Recipe.Data.Context
             modelBuilder.Entity<Like>()
             .HasKey(l => new { l.UserID, l.RecipeID }); // Define composite key
 
+            modelBuilder.Entity<Follower>()
+                .HasKey(follower => new { follower.UserID, follower.FollowerID });
+
+            modelBuilder.Entity<Following>()
+                .HasKey(following => new { following.UserID, following.FollowingID });
+
             // User-Recipe (One-to-Many)
             modelBuilder.Entity<RecipeModel>()
                 .HasOne(r => r.User)
@@ -67,6 +73,20 @@ namespace Recipe.Data.Context
                 .WithMany(u => u.Likes)
                 .HasForeignKey(l => l.UserID)
                 .OnDelete(DeleteBehavior.Cascade); // Prevent cascading delete
+
+            //User-Follower (One-to-Many)
+            modelBuilder.Entity<Follower>()
+                .HasOne(follower => follower.User)
+                .WithMany(user => user.followers)
+                .HasForeignKey(follower => follower.UserID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //User-Following (One-to-Many)
+            modelBuilder.Entity<Following>()
+                .HasOne(following => following.User)
+                .WithMany(user => user.followings)
+                .HasForeignKey(following => following.UserID)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
 
@@ -76,5 +96,7 @@ namespace Recipe.Data.Context
         public DbSet<Hashtag> Hashtags { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<RecipeModel> Recipes { get; set; }
+        public DbSet<Follower> Followers { get; set; }
+        public DbSet<Following> Followings { get; set; }
     }
 }
