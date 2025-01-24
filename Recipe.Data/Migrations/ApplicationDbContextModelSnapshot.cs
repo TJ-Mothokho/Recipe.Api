@@ -88,6 +88,32 @@ namespace Recipe.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Recipe.Data.Models.Domains.Follower", b =>
+                {
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FollowerID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserID", "FollowerID");
+
+                    b.ToTable("Followers");
+                });
+
+            modelBuilder.Entity("Recipe.Data.Models.Domains.Following", b =>
+                {
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FollowingID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserID", "FollowingID");
+
+                    b.ToTable("Followings");
+                });
+
             modelBuilder.Entity("Recipe.Data.Models.Domains.Hashtag", b =>
                 {
                     b.Property<Guid>("HashtagID")
@@ -248,6 +274,28 @@ namespace Recipe.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Recipe.Data.Models.Domains.Follower", b =>
+                {
+                    b.HasOne("Recipe.Data.Models.Domains.User", "User")
+                        .WithMany("followers")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Recipe.Data.Models.Domains.Following", b =>
+                {
+                    b.HasOne("Recipe.Data.Models.Domains.User", "User")
+                        .WithMany("followings")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Recipe.Data.Models.Domains.Like", b =>
                 {
                     b.HasOne("Recipe.Data.Models.Domains.RecipeModel", "Recipe")
@@ -305,6 +353,10 @@ namespace Recipe.Data.Migrations
                     b.Navigation("Likes");
 
                     b.Navigation("Recipes");
+
+                    b.Navigation("followers");
+
+                    b.Navigation("followings");
                 });
 #pragma warning restore 612, 618
         }

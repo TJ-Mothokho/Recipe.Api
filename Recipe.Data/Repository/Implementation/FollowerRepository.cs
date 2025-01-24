@@ -1,4 +1,5 @@
-﻿using Recipe.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Recipe.Data.Context;
 using Recipe.Data.Models.Domains;
 using Recipe.Data.Repository.Interface;
 using System;
@@ -17,33 +18,42 @@ namespace Recipe.Data.Repository.Implementation
             _context = context;
         }
 
-        public Task<bool> AddFollower(Follower follower)
+        public async Task<bool> AddFollower(Follower follower)
         {
             try
             {
-
+                await _context.Followers.AddAsync(follower);
+                await _context.SaveChangesAsync();
+                return true;
             }
             catch
             {
-
+                return false;
             }
-
-            throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteFollower(Follower follower)
+        public async Task<bool> DeleteFollower(Follower follower)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Followers.Remove(follower);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public Task<IEnumerable<Follower>> GetFollowersByID(Guid id)
+        public async Task<IEnumerable<Follower>> GetFollowersByID(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Followers.Where(x => x.Equals(id)).ToListAsync();
         }
 
-        public Task<int> GetFollowersCountByID(Guid id)
+        public async Task<int> GetFollowersCountByID(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Followers.Where(x => x.Equals(id)).CountAsync();
         }
     }
 }
