@@ -48,12 +48,12 @@ namespace Recipe.Data.Repository.Implementation
 
         public async Task<IEnumerable<Following>> GetFollowingsByID(Guid id)
         {
-            return await _context.Followings.Where(x => x.Equals(id)).ToListAsync();
+            return await _context.Followings.Where(x => x.FollowingID == id).ToListAsync();
         }
 
         public async Task<int> GetFollowingsCountByID(Guid id)
         {
-            return await _context.Followings.Where(x => x.Equals(id)).CountAsync();
+            return await _context.Followings.Where(x => x.FollowingID == id).CountAsync();
         }
     }
 }

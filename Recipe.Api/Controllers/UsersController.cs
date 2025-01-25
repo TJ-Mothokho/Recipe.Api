@@ -27,7 +27,13 @@ namespace Recipe.Api.Controllers
         [HttpPost("Follow")]
         public async Task<IActionResult> AddFollow(FollowerDTO follow)
         {
-            var followerResponse = await _followerServices.AddFollower(follow);
+            var follower = new FollowerDTO()
+            {
+                FollowerID = follow.UserID,
+                UserID = follow.FollowerID,
+            };
+            
+            var followerResponse = await _followerServices.AddFollower(follower);
 
             var following = new FollowingDTO()
             {
@@ -135,8 +141,8 @@ namespace Recipe.Api.Controllers
 
             var following = new FollowingDTO()
             {
-                FollowingID = follow.FollowerID,
-                UserID = follow.UserID
+                FollowingID = follow.UserID,
+                UserID = follow.FollowerID
             };
 
             var followingResponse = await _followingServices.DeleteFollowing(following);
