@@ -41,7 +41,10 @@ namespace Recipe.Data.Repository.Implementation
         }
         public async Task<IEnumerable<RecipeModel>> GetAllRecipes()
         {
-            return await _context.Recipes.Where(x=>x.Status=="Active").ToListAsync();
+            return await _context.Recipes
+                .Where(x=>x.Status=="Active")
+                .OrderBy(x=>x.CreatedAt)
+                .ToListAsync();
         }
         public async Task<IEnumerable<RecipeModel>> GetByCategory(Guid categoryID)
         {
